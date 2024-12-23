@@ -19,7 +19,6 @@ app.use(express.static(path.join(__dirname,"../frontend/dist")))
 
 
 app.get("*", (req, res) => {
-    console.log("first")
     res.sendFile(path.resolve(__dirname,"../frontend/dist/index.html"))
 })
 

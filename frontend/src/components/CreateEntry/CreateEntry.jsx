@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const CreateEntry = () => {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     Email: "",
     Name: "",
@@ -24,7 +24,7 @@ const CreateEntry = () => {
       return;
     }
 
-    axios.post('http://127.0.0.1:8000/api/v1/guest/new', data).then((res) => {
+    axios.post('/api/v1/guest/new', data).then((res) => {
       alert('posted Successfully')
       navigate('/entries')
       setData({
@@ -32,7 +32,7 @@ const CreateEntry = () => {
         Name: "",
         Comment: ""
       })
-      
+
     }).catch((err) => {
       alert(err.message)
     })

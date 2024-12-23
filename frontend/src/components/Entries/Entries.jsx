@@ -5,19 +5,19 @@ import axios from 'axios';
 
 const Entries = () => {
   // Stores the fetched entries
-  const [entries, setEntries] = useState([]); 
+  const [entries, setEntries] = useState([]);
 
   // Track loading state
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   // Track error state
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   // Track total entries for pagination
-  const [totalEntries, setTotalEntries] = useState(0); 
+  const [totalEntries, setTotalEntries] = useState(0);
 
   // Current page for pagination
-  const [currentPage, setCurrentPage] = useState(0); 
+  const [currentPage, setCurrentPage] = useState(0);
 
   const entriesPerPage = 5;
 
@@ -25,29 +25,29 @@ const Entries = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/v1/guest", {
-          params: { page: currentPage + 1, limit: entriesPerPage }, 
+        const res = await axios.get("/api/v1/guest", {
+          params: { page: currentPage + 1, limit: entriesPerPage },
         });
         setEntries(res.data.data);
-        setTotalEntries(res.data.pagination.totalEntries); 
+        setTotalEntries(res.data.pagination.totalEntries);
 
         // setting loading false
-        setLoading(false); 
+        setLoading(false);
       } catch (err) {
         setError("Failed to fetch entries");
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchEntries();
-  }, [currentPage]); 
+  }, [currentPage]);
 
   // Handle page click
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
 
- 
+
   if (loading) {
     return <div>Loading...</div>;
   }
